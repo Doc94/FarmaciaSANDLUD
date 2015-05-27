@@ -7,6 +7,7 @@ package Clases;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,7 +19,7 @@ import java.util.logging.Logger;
 public class Conexion {
     
     public Connection con;
-
+    PreparedStatement ps;
     public Conexion() {
         
         try {
@@ -46,6 +47,28 @@ public class Conexion {
         this.con = con;
     }
     
-    
+    public boolean registrar(){
+        
+        int res = 0;
+        
+        try {
+            Conexion c = new Conexion();
+            
+            String query = "insert into persona values (?,?,?) ";
+            
+            ps = c.getCon().prepareStatement(query);
+            ps.setString(1, rut);
+            ps.setString(2, nombre);
+            ps.setString(3, apellido);
+            
+            
+            res = ps.executeUpdate(); //insert-delete-update | select->executeQuery
+        
+        } catch (SQLException ex) {
+            Logger.getLogger(Persona.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return res;
+    }
             
 }
