@@ -8,6 +8,7 @@ package Clases;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -47,28 +48,27 @@ public class Conexion {
         this.con = con;
     }
     
-    public boolean registrar(){
+    public boolean existeuser(String rut, String pass){
         
-        int res = 0;
+        boolean existe = false;
         
         try {
             Conexion c = new Conexion();
             
-            String query = "insert into persona values (?,?,?) ";
+            String query = "SELECT * FROM TABLA WHERE rut=? , clave=? ";
             
             ps = c.getCon().prepareStatement(query);
             ps.setString(1, rut);
-            ps.setString(2, nombre);
-            ps.setString(3, apellido);
+            ps.setString(2, pass);
             
             
-            res = ps.executeUpdate(); //insert-delete-update | select->executeQuery
-        
+            ResultSet r_query = ps.executeQuery(); //insert-delete-update | select->executeQuery
+            existe = r_query.next();
         } catch (SQLException ex) {
-            Logger.getLogger(Persona.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        return res;
+        return existe;
     }
             
 }
