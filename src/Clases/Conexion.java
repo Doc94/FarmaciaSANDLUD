@@ -55,7 +55,7 @@ public class Conexion {
         try {
             Conexion c = new Conexion();
             
-            String query = "SELECT * FROM TABLA WHERE rut=? , clave=? ";
+            String query = "SELECT * FROM usuarios WHERE rut=?  and contraseña=? ";
             
             ps = c.getCon().prepareStatement(query);
             ps.setString(1, rut);
