@@ -5,6 +5,8 @@
  */
 package Diseño;
 
+import Clases.Conexion;
+
 /**
  *
  * @author Administrador
@@ -99,12 +101,19 @@ public class Inicio extends javax.swing.JFrame {
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         char[] asd = pswContraseña.getPassword();
         int largo = asd.length;
+        String rut=txtRut.getText();
         String password = "";
             for(char ca : asd)
             {
                 password += ca;
             }
-        
+        Conexion c = new Conexion();
+            if(c.existeuser(rut, password))
+                {
+                    Menu m = new Menu();
+                    m.setVisible(true);
+                    this.setVisible(false);
+                }
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1MouseClicked
 
