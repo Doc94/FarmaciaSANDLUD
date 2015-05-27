@@ -6,6 +6,7 @@
 package Diseño;
 
 import Clases.Conexion;
+import Clases.Usuario;
 
 /**
  *
@@ -16,7 +17,9 @@ public class Inicio extends javax.swing.JFrame {
     /**
      * Creates new form Inicio
      */
+    public static Usuario U = new Usuario();
     public Inicio() {
+    
         initComponents();
     }
 
@@ -102,6 +105,7 @@ public class Inicio extends javax.swing.JFrame {
         char[] asd = pswContraseña.getPassword();
         int largo = asd.length;
         String rut=txtRut.getText();
+        
         String password = "";
             for(char ca : asd)
             {
@@ -109,9 +113,11 @@ public class Inicio extends javax.swing.JFrame {
             }
         Conexion c = new Conexion();
             if(c.existeuser(rut, password))
-                {
+                {   
+                    
                     Menu m = new Menu();
                     m.setVisible(true);
+                    m.lblnombre.setText(c.retorna_usuario(rut).getNombre());
                     this.setVisible(false);
                 }
         // TODO add your handling code here:

@@ -70,5 +70,29 @@ public class Conexion {
         
         return existe;
     }
+    public Usuario retorna_usuario(String rut)
+    {
+        Usuario U = new Usuario();
+        try {
+            Conexion c = new Conexion();
             
+            String query = "SELECT * FROM usuarios WHERE rut=?   ";
+            
+            ps = c.getCon().prepareStatement(query);
+            ps.setString(1, rut);
+            
+            
+            
+            ResultSet r_query = ps.executeQuery(); //insert-delete-update | select->executeQuery
+            
+            while(r_query.next())
+            {
+            U.setNombre(String.valueOf(r_query.getObject("Nombre")));
+            U.setRut(String.valueOf(r_query.getObject("rut")));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+     return U;
+     }
 }

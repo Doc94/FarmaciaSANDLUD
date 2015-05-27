@@ -31,7 +31,7 @@ public class Menu extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        lblnombre = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -44,7 +44,7 @@ public class Menu extends javax.swing.JFrame {
 
         jLabel2.setText("Bienvenido");
 
-        jLabel3.setText("TIPOX");
+        lblnombre.setText("TIPOX");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -67,7 +67,7 @@ public class Menu extends javax.swing.JFrame {
                                 .addGap(107, 107, 107)
                                 .addComponent(jLabel2)
                                 .addGap(18, 18, 18)
-                                .addComponent(jLabel3)))
+                                .addComponent(lblnombre)))
                         .addGap(0, 83, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -79,7 +79,7 @@ public class Menu extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel3))
+                    .addComponent(lblnombre))
                 .addGap(35, 35, 35)
                 .addComponent(jButton2)
                 .addGap(79, 79, 79)
@@ -130,6 +130,6 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    public static javax.swing.JLabel lblnombre;
     // End of variables declaration//GEN-END:variables
 }
