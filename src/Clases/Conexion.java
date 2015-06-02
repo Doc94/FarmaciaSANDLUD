@@ -25,7 +25,7 @@ public class Conexion {
         
         try {
             Class.forName("com.mysql.jdbc.Driver"); //Driver class Conexion
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/farmaciasandlud?zeroDateTimeBehavior=convertToNull", "root", ""); //URL de Conexion
+            con = DriverManager.getConnection("jdbc:mysql://hercules.staxhosting.com:3306/doc_FarmaciaSANDLUD?zeroDateTimeBehavior=convertToNull", "doc_farmsand", "salco123"); //URL de Conexion
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -93,6 +93,6 @@ public class Conexion {
         } catch (SQLException ex) {
             Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
         }
-     return U;
+        return U;
      }
 }
