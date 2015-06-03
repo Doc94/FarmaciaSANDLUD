@@ -3,22 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Diseño;
+package ModeloGrafico;
 
 import Clases.Conexion;
 import Clases.Usuario;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Administrador
  */
-public class Inicio extends javax.swing.JFrame {
+public class Login extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form Inicio
      */
     public static Usuario U = new Usuario();
-    public Inicio() {
+    public Login() {
     
         initComponents();
     }
@@ -75,9 +76,8 @@ public class Inicio extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtRut, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
-                                .addComponent(pswContraseña)))))
+                            .addComponent(txtRut, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
+                            .addComponent(pswContraseña))))
                 .addContainerGap(91, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -112,14 +112,16 @@ public class Inicio extends javax.swing.JFrame {
                 password += ca;
             }
         Conexion c = new Conexion();
-            if(c.existeuser(rut, password))
-                {   
+            if(c.existeuser(rut, password)) {   
                     
-                    Menu m = new Menu();
-                    m.setVisible(true);
-                    m.lblnombre.setText(c.retorna_usuario(rut).getNombre());
-                    this.setVisible(false);
-                }
+                    PreVenta m = new PreVenta();
+                    Main.add                   
+                    //m.jLabel_MsgWelcome.setText("Bienvenido "+c.retorna_usuario(rut).getNombre());
+                    this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "Usuario o Contraseña Incorrectos", "ERROR", JOptionPane.WARNING_MESSAGE);
+            }
+            
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1MouseClicked
 
@@ -145,20 +147,21 @@ public class Inicio extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Inicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Inicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Inicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Inicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Inicio().setVisible(true);
+                new Login().setVisible(true);
             }
         });
     }
