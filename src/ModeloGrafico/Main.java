@@ -6,10 +6,13 @@
 package ModeloGrafico;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
+import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
+import javax.swing.WindowConstants;
 
 /**
  *
@@ -24,7 +27,8 @@ public class Main extends javax.swing.JFrame {
     public static PreVenta pv = new PreVenta();
     
     public Main() {
-        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        
+        //jDesktopPaneM.setSize();
         initComponents();
         
     }
@@ -38,6 +42,8 @@ public class Main extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jDesktopPaneM = new javax.swing.JDesktopPane();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -46,15 +52,26 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        javax.swing.GroupLayout jDesktopPaneMLayout = new javax.swing.GroupLayout(jDesktopPaneM);
+        jDesktopPaneM.setLayout(jDesktopPaneMLayout);
+        jDesktopPaneMLayout.setHorizontalGroup(
+            jDesktopPaneMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 953, Short.MAX_VALUE)
+        );
+        jDesktopPaneMLayout.setVerticalGroup(
+            jDesktopPaneMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 662, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 771, Short.MAX_VALUE)
+            .addComponent(jDesktopPaneM)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 475, Short.MAX_VALUE)
+            .addComponent(jDesktopPaneM)
         );
 
         pack();
@@ -62,15 +79,27 @@ public class Main extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
-        this.add(l,BorderLayout.CENTER);    
-        l.setLocation(700, 300);
+        //this.add(l,BorderLayout.CENTER);
+        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        //l.setBounds(750, 200, 600, 400);
+        
+        Dimension desktopSize = jDesktopPaneM.getSize();
+        Dimension jInternalFrameSize = l.getSize();
+        l.setLocation((desktopSize.width - jInternalFrameSize.width)/2,
+                    (desktopSize.height- jInternalFrameSize.height)/2);
+        
+        
+        jDesktopPaneM.add(l);
         l.setClosable(false);
-        l.setVisible(true);
+        l.show();
     }//GEN-LAST:event_formWindowOpened
 
     public static void PasarAPreVenta() {
         l.dispose();
-        this.Add(pv);
+        //this.Add(pv);
         
     }
     /**
@@ -109,6 +138,7 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public static javax.swing.JDesktopPane jDesktopPaneM;
     // End of variables declaration//GEN-END:variables
 
 }

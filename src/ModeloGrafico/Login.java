@@ -7,6 +7,8 @@ package ModeloGrafico;
 
 import Clases.Conexion;
 import Clases.Usuario;
+import static ModeloGrafico.Main.jDesktopPaneM;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -18,7 +20,7 @@ public class Login extends javax.swing.JInternalFrame {
     /**
      * Creates new form Inicio
      */
-    public static Usuario U = new Usuario();
+    //public static Usuario U = new Usuario();
     public Login() {
     
         initComponents();
@@ -115,9 +117,13 @@ public class Login extends javax.swing.JInternalFrame {
             if(c.existeuser(rut, password)) {   
                     
                     PreVenta m = new PreVenta();
-                    Main.add                   
-                    //m.jLabel_MsgWelcome.setText("Bienvenido "+c.retorna_usuario(rut).getNombre());
+                    this.setVisible(false);
+                    m.jLabel_MsgWelcome.setText("Bienvenido "+c.retorna_usuario(rut).getNombre());
+                    m.jTextField_Vendedor.setText(c.retorna_usuario(rut).getNombre());
+                    Main.jDesktopPaneM.add(m);
+                    m.setVisible(true);
                     this.dispose();
+                    
             } else {
                 JOptionPane.showMessageDialog(this, "Usuario o Contraseña Incorrectos", "ERROR", JOptionPane.WARNING_MESSAGE);
             }
