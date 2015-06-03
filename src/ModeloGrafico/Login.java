@@ -6,9 +6,6 @@
 package ModeloGrafico;
 
 import Clases.Conexion;
-import Clases.Usuario;
-import static ModeloGrafico.Main.jDesktopPaneM;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -114,14 +111,10 @@ public class Login extends javax.swing.JInternalFrame {
                 password += ca;
             }
         Conexion c = new Conexion();
-            if(c.existeuser(rut, password)) {   
-                    
-                    PreVenta m = new PreVenta();
+            if(c.existeuser(rut, password)) {                      
                     this.setVisible(false);
-                    m.jLabel_MsgWelcome.setText("Bienvenido "+c.retorna_usuario(rut).getNombre());
-                    m.jTextField_Vendedor.setText(c.retorna_usuario(rut).getNombre());
-                    Main.jDesktopPaneM.add(m);
-                    m.setVisible(true);
+                    Main.IniciarVentanaPreVenta(c.retorna_usuario(rut));
+                    JOptionPane.showMessageDialog(this, "Bienvenido al sistema", "OK", JOptionPane.INFORMATION_MESSAGE);
                     this.dispose();
                     
             } else {

@@ -5,6 +5,7 @@
  */
 package ModeloGrafico;
 
+import Clases.Usuario;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -23,8 +24,8 @@ public class Main extends javax.swing.JFrame {
     /**
      * Creates new form Main
      */
-    public static Login l = new Login();
-    public static PreVenta pv = new PreVenta();
+    public static Login ventana_login = new Login();
+    public static PreVenta ventana_preventa = new PreVenta();
     
     public Main() {
         
@@ -85,21 +86,26 @@ public class Main extends javax.swing.JFrame {
         this.setVisible(true);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         //l.setBounds(750, 200, 600, 400);
+        Main.IniciarVentanaLogin();
         
-        Dimension desktopSize = jDesktopPaneM.getSize();
-        Dimension jInternalFrameSize = l.getSize();
-        l.setLocation((desktopSize.width - jInternalFrameSize.width)/2,
-                    (desktopSize.height- jInternalFrameSize.height)/2);
-        
-        
-        jDesktopPaneM.add(l);
-        l.setClosable(false);
-        l.show();
     }//GEN-LAST:event_formWindowOpened
 
-    public static void PasarAPreVenta() {
-        l.dispose();
-        //this.Add(pv);
+    public static void IniciarVentanaPreVenta(Usuario u) {
+        jDesktopPaneM.add(ventana_preventa);
+        ventana_preventa.CargarUsuario(u);
+        ventana_preventa.setClosable(false);
+        ventana_preventa.show();
+    }
+    
+    public static void IniciarVentanaLogin() {
+        Dimension desktopSize = jDesktopPaneM.getSize();
+        Dimension jInternalFrameSize = ventana_login.getSize();
+        ventana_login.setLocation((desktopSize.width - jInternalFrameSize.width)/2,
+                    (desktopSize.height- jInternalFrameSize.height)/2);
+               
+        jDesktopPaneM.add(ventana_login);
+        ventana_login.setClosable(false);
+        ventana_login.show();
         
     }
     /**

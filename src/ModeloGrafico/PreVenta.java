@@ -5,6 +5,8 @@
  */
 package ModeloGrafico;
 
+import Clases.Usuario;
+
 /**
  *
  * @author Administrador
@@ -14,7 +16,9 @@ public class PreVenta extends javax.swing.JInternalFrame {
     /**
      * Creates new form Menu2
      */
+    public Usuario per;
     public PreVenta() {
+        
         initComponents();
     }
 
@@ -44,6 +48,24 @@ public class PreVenta extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         jTextField_Folio4 = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
+
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameOpened(evt);
+            }
+        });
 
         jLabel_MsgWelcome.setText("Welcome X");
 
@@ -192,6 +214,13 @@ public class PreVenta extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
+        // TODO add your handling code here:
+        jTextField_Vendedor.setText(per.getNombre());
+        jLabel_MsgWelcome.setText("Bienvenido "+per.getNombre());
+    }//GEN-LAST:event_formInternalFrameOpened
+
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -212,4 +241,8 @@ public class PreVenta extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTextField_Folio4;
     public static javax.swing.JTextField jTextField_Vendedor;
     // End of variables declaration//GEN-END:variables
+
+   public void CargarUsuario(Usuario u) {
+        per = u;
+    }
 }
