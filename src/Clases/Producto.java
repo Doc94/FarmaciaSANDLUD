@@ -11,15 +11,15 @@ package Clases;
  */
 public class Producto {
     private String codigo;
-    private String marca;
+    private String nombre;
     private String componente;
     private String categoria;
     private int precio;
     private int stock;
 
-    public Producto(String codigo, String marca, String componente, String categoria, int precio, int stock) {
+    public Producto(String codigo, String nombre, String componente, String categoria, int precio, int stock) {
         this.codigo = codigo;
-        this.marca = marca;
+        this.nombre = nombre;
         this.componente = componente;
         this.categoria = categoria;
         this.precio = precio;
@@ -34,12 +34,12 @@ public class Producto {
         this.codigo = codigo;
     }
 
-    public String getMarca() {
-        return marca;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setMarca(String marca) {
-        this.marca = marca;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public String getComponente() {
