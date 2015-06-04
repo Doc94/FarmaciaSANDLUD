@@ -6,6 +6,7 @@
 package ModeloGrafico;
 
 import Clases.Conexion;
+import Clases.Usuario;
 import javax.swing.JOptionPane;
 
 /**
@@ -113,8 +114,14 @@ public class Login extends javax.swing.JInternalFrame {
         Conexion c = new Conexion();
             if(c.existeuser(rut, password)) {                      
                     this.setVisible(false);
-                    Main.IniciarVentanaPreVenta(c.retorna_usuario(rut));
-                    JOptionPane.showMessageDialog(this, "Bienvenido al sistema", "OK", JOptionPane.INFORMATION_MESSAGE);
+                    Usuario user = c.retorna_usuario(rut);
+                    int blah = user.getNivel();
+                    if(user.getNivel() == 1) {
+                        Main.IniciarVentanaAdmin(user);
+                    } else {
+                        Main.IniciarVentanaPreVenta(user);
+                    }
+                    //JOptionPane.showMessageDialog(this, "Bienvenido al sistema", "OK", JOptionPane.INFORMATION_MESSAGE);
                     this.dispose();
                     
             } else {

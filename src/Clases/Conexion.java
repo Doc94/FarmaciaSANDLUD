@@ -89,6 +89,7 @@ public class Conexion {
             {
             U.setNombre(String.valueOf(r_query.getObject("Nombre")));
             U.setRut(String.valueOf(r_query.getObject("rut")));
+            U.setNivel(Integer.parseInt(String.valueOf(r_query.getObject("nivel"))));
             }
         } catch (SQLException ex) {
             Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);

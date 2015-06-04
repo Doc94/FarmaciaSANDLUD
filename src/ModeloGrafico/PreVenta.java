@@ -213,14 +213,14 @@ public class PreVenta extends javax.swing.JInternalFrame {
 
         tblBuscar.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"Pedro", "arenas", "holi", null, null, null}
+                {"Pedro", "arenas", "holi", null, null, null, null}
             },
             new String [] {
-                "Codigo", "Nombre", "Descripción", "Composición", "Stock", "Precio"
+                "Codigo", "Nombre", "Descripción", "Categoría", "Composición", "Stock", "Precio"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, true, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

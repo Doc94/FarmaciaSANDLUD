@@ -26,6 +26,7 @@ public class Main extends javax.swing.JFrame {
      */
     public static Login ventana_login = new Login();
     public static PreVenta ventana_preventa = new PreVenta();
+    public static Admin ventana_admin = new Admin();
     
     public Main() {
         
@@ -107,6 +108,13 @@ public class Main extends javax.swing.JFrame {
         ventana_login.setClosable(false);
         ventana_login.show();
         
+    }
+    
+    static void IniciarVentanaAdmin(Usuario user) {
+        jDesktopPaneM.add(ventana_admin);
+        ventana_admin.CargarUsuario(user);
+        ventana_admin.setClosable(false);
+        ventana_admin.show();
     }
     /**
      * @param args the command line arguments

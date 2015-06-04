@@ -350,7 +350,7 @@
             <Component class="javax.swing.JTable" name="tblBuscar">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="6" rowCount="1">
+                  <Table columnCount="7" rowCount="1">
                     <Column editable="false" title="Codigo" type="java.lang.Object">
                       <Data value="Pedro"/>
                     </Column>
@@ -360,8 +360,9 @@
                     <Column editable="false" title="Descripci&#xf3;n" type="java.lang.Object">
                       <Data value="holi"/>
                     </Column>
+                    <Column editable="false" title="Categor&#xed;a" type="java.lang.Object"/>
                     <Column editable="false" title="Composici&#xf3;n" type="java.lang.Object"/>
-                    <Column editable="true" title="Stock" type="java.lang.Object"/>
+                    <Column editable="false" title="Stock" type="java.lang.Object"/>
                     <Column editable="false" title="Precio" type="java.lang.Object"/>
                   </Table>
                 </Property>
