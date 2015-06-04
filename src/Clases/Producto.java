@@ -14,16 +14,29 @@ public class Producto {
     private String nombre;
     private String componente;
     private String categoria;
+    private String descripcion;
     private int precio;
     private int stock;
 
-    public Producto(String codigo, String nombre, String componente, String categoria, int precio, int stock) {
+    public Producto(String codigo, String nombre, String componente, String categoria, String descripcion, int precio, int stock) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.componente = componente;
         this.categoria = categoria;
+        this.descripcion = descripcion;
         this.precio = precio;
         this.stock = stock;
+    }
+
+    public Producto() {
+    }
+    
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     public String getCodigo() {

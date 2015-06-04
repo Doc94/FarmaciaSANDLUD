@@ -5,7 +5,12 @@
  */
 package ModeloGrafico;
 
+import Clases.Conexion;
+import Clases.Producto;
 import Clases.Usuario;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.time.LocalDateTime;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -37,9 +42,9 @@ public class PreVenta extends javax.swing.JInternalFrame {
         jLabel_MsgStatus = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField_Folio = new javax.swing.JTextField();
+        jTextField_Fecha = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        jLabel_fecha = new javax.swing.JLabel();
         jTextField_Folio2 = new javax.swing.JTextField();
         jTextField_Vendedor = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -52,17 +57,17 @@ public class PreVenta extends javax.swing.JInternalFrame {
         jButton2 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tblBuscar = new javax.swing.JTable();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        jTable_busqueda = new javax.swing.JTable();
+        jTextField_BCodigo = new javax.swing.JTextField();
+        jTextField_BNombre = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
+        jButton_BuscarPorCodigo = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
+        jButton_BuscarPorNombre = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jButton5 = new javax.swing.JButton();
+        jButton_AgregarAlCarro = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
+        jTextField_CantProd = new javax.swing.JFormattedTextField();
 
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
@@ -90,9 +95,9 @@ public class PreVenta extends javax.swing.JInternalFrame {
 
         jLabel1.setText("FOLIO:");
 
-        jTextField_Folio.setEditable(false);
+        jTextField_Fecha.setEditable(false);
 
-        jLabel3.setText("FECHA");
+        jLabel_fecha.setText("FECHA");
 
         jTextField_Folio2.setEditable(false);
 
@@ -112,9 +117,9 @@ public class PreVenta extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextField_Folio2, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35)
-                .addComponent(jLabel3)
+                .addComponent(jLabel_fecha)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField_Folio, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextField_Fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(88, 88, 88)
                 .addComponent(jLabel4)
                 .addGap(18, 18, 18)
@@ -127,8 +132,8 @@ public class PreVenta extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField_Folio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
+                    .addComponent(jTextField_Fecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel_fecha)
                     .addComponent(jTextField_Folio2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField_Vendedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
@@ -211,7 +216,7 @@ public class PreVenta extends javax.swing.JInternalFrame {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        tblBuscar.setModel(new javax.swing.table.DefaultTableModel(
+        jTable_busqueda.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"Pedro", "arenas", "holi", null, null, null, null}
             },
@@ -227,27 +232,32 @@ public class PreVenta extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(tblBuscar);
+        jScrollPane2.setViewportView(jTable_busqueda);
 
         jLabel6.setText("Ingrese código");
 
-        jButton3.setText("Buscar");
+        jButton_BuscarPorCodigo.setText("Buscar");
+        jButton_BuscarPorCodigo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_BuscarPorCodigoActionPerformed(evt);
+            }
+        });
 
         jLabel7.setText("Ingrese nombre");
 
-        jButton4.setText("Buscar");
+        jButton_BuscarPorNombre.setText("Buscar");
 
         jLabel8.setText("Cantidad");
 
-        jButton5.setText("Añadir");
-        jButton5.addMouseListener(new java.awt.event.MouseAdapter() {
+        jButton_AgregarAlCarro.setText("Añadir");
+        jButton_AgregarAlCarro.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton5MouseClicked(evt);
+                jButton_AgregarAlCarroMouseClicked(evt);
             }
         });
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        jButton_AgregarAlCarro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                jButton_AgregarAlCarroActionPerformed(evt);
             }
         });
 
@@ -257,6 +267,8 @@ public class PreVenta extends javax.swing.JInternalFrame {
                 jButton6ActionPerformed(evt);
             }
         });
+
+        jTextField_CantProd.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -271,21 +283,21 @@ public class PreVenta extends javax.swing.JInternalFrame {
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel6)
                                 .addGap(18, 18, 18)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTextField_BCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jButton_BuscarPorCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(106, 106, 106)
                                 .addComponent(jLabel7)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTextField_BNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(31, 31, 31)
-                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jButton_BuscarPorNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel8)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(28, 28, 28)
-                                .addComponent(jButton5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jTextField_CantProd, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton_AgregarAlCarro)
                                 .addGap(102, 102, 102)
                                 .addComponent(jButton6)))
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -296,20 +308,20 @@ public class PreVenta extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField_BCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField_BNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6)
-                    .addComponent(jButton3)
+                    .addComponent(jButton_BuscarPorCodigo)
                     .addComponent(jLabel7)
-                    .addComponent(jButton4))
+                    .addComponent(jButton_BuscarPorNombre))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5)
-                    .addComponent(jButton6))
+                    .addComponent(jButton_AgregarAlCarro)
+                    .addComponent(jButton6)
+                    .addComponent(jTextField_CantProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(27, Short.MAX_VALUE))
         );
 
@@ -338,7 +350,7 @@ public class PreVenta extends javax.swing.JInternalFrame {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel_MsgWelcome)
                     .addComponent(jLabel_MsgStatus)))
@@ -351,21 +363,46 @@ public class PreVenta extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         jTextField_Vendedor.setText(per.getNombre());
         jLabel_MsgWelcome.setText("Bienvenido "+per.getNombre());
+        jTextField_CantProd.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                    char c = e.getKeyChar();
+                if (!(Character.isDigit(c) || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
+                    getToolkit().beep();
+                    e.consume();
+                }
+            }
+        });
+        CargarNuevaCompra();
     }//GEN-LAST:event_formInternalFrameOpened
 
-    private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
+    private void jButton_AgregarAlCarroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_AgregarAlCarroMouseClicked
        
-    }//GEN-LAST:event_jButton5MouseClicked
+    }//GEN-LAST:event_jButton_AgregarAlCarroMouseClicked
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void jButton_AgregarAlCarroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_AgregarAlCarroActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
+        if(jTextField_CantProd.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(this, "Coloque la cant de productos", "ERROR", JOptionPane.WARNING_MESSAGE);
+        } else {
+            int fila = jTable_busqueda.getSelectedRow();
+            Object data = jTable_busqueda.getValueAt(fila, 5);
+            if(Integer.parseInt(data.toString()) < Integer.parseInt(jTextField_CantProd.getText())) {
+                JOptionPane.showMessageDialog(this, "No puedes añadir mas de lo que hay", "ERROR", JOptionPane.WARNING_MESSAGE);
+            } else {
+                Object[] row = { jTable_busqueda.getValueAt(fila, 0), jTable_busqueda.getValueAt(fila, 1), jTextField_CantProd.getText(), Integer.parseInt(jTable_busqueda.getValueAt(fila, 6).toString()) * Integer.parseInt(jTextField_CantProd.getText())};
+                DefaultTableModel modelcompra = (DefaultTableModel) jTable_compra.getModel();
+                modelcompra.addRow(row);
+                jTable_compra.setModel(modelcompra);
+            }
+        }
+    }//GEN-LAST:event_jButton_AgregarAlCarroActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
-        int co = tblBuscar.getSelectedColumn();
-        int fi = tblBuscar.getSelectedRow();
-        Object data = tblBuscar.getValueAt(fi, 0);
+        int co = jTable_busqueda.getSelectedColumn();
+        int fi = jTable_busqueda.getSelectedRow();
+        Object data = jTable_busqueda.getValueAt(fi, 0);
         JOptionPane.showMessageDialog(this, "VALOR " + data.toString(), "OK", JOptionPane.INFORMATION_MESSAGE);
         
         String nvalue1 = data.toString();
@@ -379,18 +416,40 @@ public class PreVenta extends javax.swing.JInternalFrame {
         ((DefaultTableModel)jTable_compra.getModel()).removeRow(jTable_compra.getSelectedRow());
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    
+    private void jButton_BuscarPorCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_BuscarPorCodigoActionPerformed
+        // TODO add your handling code here:
+        Conexion c = new Conexion();
+        Producto prod = c.retorna_producto(jTextField_BCodigo.getText());
+        if(prod == null) {
+            JOptionPane.showMessageDialog(this, "No hay productos con estos datos", "ERROR", JOptionPane.WARNING_MESSAGE);
+        } else {
+            Object[] row = { prod.getCodigo(), prod.getNombre(), prod.getDescripcion(), prod.getCategoria(), prod.getComponente(), prod.getStock(), prod.getPrecio() };
+            DefaultTableModel modelcompra = (DefaultTableModel) jTable_busqueda.getModel();
+            modelcompra.addRow(row);
+            jTable_busqueda.setModel(modelcompra);
+        }
+        
+    }//GEN-LAST:event_jButton_BuscarPorCodigoActionPerformed
+
+    public void CargarUsuario(Usuario u) {
+        per = u;
+    }
+
+    private void CargarNuevaCompra() {
+        LocalDateTime fecha = LocalDateTime.now();
+        String fechacompleta = Integer.toString(fecha.getDayOfMonth()) + "/" + Integer.toString(fecha.getMonthValue()) + "/" + Integer.toString(fecha.getYear());
+        jTextField_Fecha.setText(fechacompleta);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton_AgregarAlCarro;
+    private javax.swing.JButton jButton_BuscarPorCodigo;
+    private javax.swing.JButton jButton_BuscarPorNombre;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -398,23 +457,21 @@ public class PreVenta extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel_MsgStatus;
     public static javax.swing.JLabel jLabel_MsgWelcome;
+    private javax.swing.JLabel jLabel_fecha;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable_busqueda;
     private javax.swing.JTable jTable_compra;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField_Folio;
+    private javax.swing.JTextField jTextField_BCodigo;
+    private javax.swing.JTextField jTextField_BNombre;
+    private javax.swing.JFormattedTextField jTextField_CantProd;
+    private javax.swing.JTextField jTextField_Fecha;
     private javax.swing.JTextField jTextField_Folio2;
     private javax.swing.JTextField jTextField_Folio4;
     public static javax.swing.JTextField jTextField_Vendedor;
-    private javax.swing.JTable tblBuscar;
     // End of variables declaration//GEN-END:variables
-
-   public void CargarUsuario(Usuario u) {
-        per = u;
-    }
+  
 }

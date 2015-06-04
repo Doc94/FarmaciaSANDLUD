@@ -6,13 +6,8 @@
 package ModeloGrafico;
 
 import Clases.Usuario;
-import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
-import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 
 /**
