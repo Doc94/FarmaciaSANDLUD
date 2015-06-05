@@ -100,6 +100,35 @@ public class Conexion {
         }
         return pro;
     }
+    public Producto retorna_producto_n(String nombre) {
+        Producto pro = new Producto();
+        try {
+            Conexion c = new Conexion();
+            
+            String query = "SELECT * FROM producto WHERE nombre=?   ";
+            
+            ps = c.getCon().prepareStatement(query);
+            ps.setString(1, nombre);
+            
+            
+            
+            ResultSet r_query = ps.executeQuery(); //insert-delete-update | select->executeQuery
+            
+            while(r_query.next())
+            {
+            pro.setCodigo(String.valueOf(r_query.getObject("codigo")));
+            pro.setNombre(String.valueOf(r_query.getObject("nombre")));
+            pro.setComponente(String.valueOf(r_query.getObject("compuesto")));
+            pro.setDescripcion(String.valueOf(r_query.getObject("descripción")));
+            pro.setStock(Integer.parseInt(String.valueOf(r_query.getObject("stock"))));
+            pro.setCategoria(String.valueOf(r_query.getObject("categoria")));
+            pro.setPrecio(Integer.parseInt(String.valueOf(r_query.getObject("precio"))));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return pro;
+    }
     
     public Usuario retorna_usuario(String rut)
     {
