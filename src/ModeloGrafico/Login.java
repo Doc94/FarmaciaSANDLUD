@@ -40,7 +40,24 @@ public class Login extends javax.swing.JInternalFrame {
         lblpassword = new javax.swing.JLabel();
         txtRut = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameActivated(evt);
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+        });
 
         jButton1.setText("Ingresar");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -122,10 +139,15 @@ public class Login extends javax.swing.JInternalFrame {
                         Main.IniciarVentanaPreVenta(user);
                     }
                     //JOptionPane.showMessageDialog(this, "Bienvenido al sistema", "OK", JOptionPane.INFORMATION_MESSAGE);
+                    txtRut.setText("");
+                    pswContraseña.setText("");
                     this.dispose();
+                    
                     
             } else {
                 JOptionPane.showMessageDialog(this, "Usuario o Contraseña Incorrectos", "ERROR", JOptionPane.WARNING_MESSAGE);
+                txtRut.setText("");
+            pswContraseña.setText("");
             }
             
         // TODO add your handling code here:
@@ -135,6 +157,12 @@ public class Login extends javax.swing.JInternalFrame {
 
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void formInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameActivated
+        // TODO add your handling code here:
+        txtRut.setText("");
+        pswContraseña.setText("");
+    }//GEN-LAST:event_formInternalFrameActivated
 
     /**
      * @param args the command line arguments
