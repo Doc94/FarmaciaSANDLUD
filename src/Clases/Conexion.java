@@ -24,6 +24,7 @@ public class Conexion {
     
     public Connection con;
     PreparedStatement ps;
+    PreparedStatement ps2;
     public Conexion() {
         
         try {
@@ -180,11 +181,68 @@ public class Conexion {
                 Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-            
+         c.modifica_stock(li);
              
             
         return rsul;
             
+    }
+    public int retorna_stock (String codigo)
+    {
+        int stock=0;
+        String query = "SELECT * FROM producto WHERE codigo=?   ";
+        try 
+        {
+            Conexion c = new Conexion();
+            
+            ps = c.getCon().prepareStatement(query);
+            ps.setString(1, codigo);
+            
+            
+            
+            ResultSet r_query = ps.executeQuery(); //insert-delete-update | select->executeQuery
+            
+            while(r_query.next())
+            {
+                stock=Integer.parseInt(String.valueOf(r_query.getObject("precio")));
+            }
+        } 
+        catch (SQLException ex) 
+        {
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         
+        return stock;
+    }
+   
+    public int modifica_stock(ArrayList<Producto>li)
+    {
+     int rsul=0;
+     int cant=0;
+     int stock=0;
+     int ST=0;
+        Conexion c = new Conexion();
+        for(int i=0;i<li.size();i++)
+        {   
+        stock=c.retorna_stock(li.get(i).getCodigo());
+        cant=li.get(i).getStock();
+        ST=stock-cant;
+        try
+        {
+        String query = "update producto set stock=? where codigo=?   ";
+        ps = c.getCon().prepareStatement(query);
+        ps.setInt(1,ST);
+        rsul= ps.executeUpdate();
+        }
+        catch (SQLException ex) 
+        {
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+            
+       
+        } 
+     return rsul;   
     }
     public Usuario retorna_usuario(String rut)
     {
