@@ -204,7 +204,7 @@ public class Conexion {
             
             while(r_query.next())
             {
-                stock=Integer.parseInt(String.valueOf(r_query.getObject("precio")));
+                stock=Integer.parseInt(String.valueOf(r_query.getObject("stock")));
             }
         } 
         catch (SQLException ex) 
@@ -232,6 +232,7 @@ public class Conexion {
         String query = "update producto set stock=? where codigo=?   ";
         ps = c.getCon().prepareStatement(query);
         ps.setInt(1,ST);
+        ps.setString(2, li.get(i).getCodigo());
         rsul= ps.executeUpdate();
         }
         catch (SQLException ex) 
