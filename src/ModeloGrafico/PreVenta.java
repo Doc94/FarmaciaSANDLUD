@@ -65,7 +65,7 @@ public class PreVenta extends javax.swing.JInternalFrame {
         jLabel6 = new javax.swing.JLabel();
         jButton_BuscarPorCodigo = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
-        Bnombre = new javax.swing.JButton();
+        jButton_BuscarPorNombre = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         jButton_AgregarAlCarro = new javax.swing.JButton();
         jTextField_CantProd = new javax.swing.JFormattedTextField();
@@ -259,10 +259,10 @@ public class PreVenta extends javax.swing.JInternalFrame {
 
         jLabel7.setText("Ingrese nombre");
 
-        Bnombre.setText("Buscar");
-        Bnombre.addActionListener(new java.awt.event.ActionListener() {
+        jButton_BuscarPorNombre.setText("Buscar");
+        jButton_BuscarPorNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BnombreActionPerformed(evt);
+                jButton_BuscarPorNombreActionPerformed(evt);
             }
         });
 
@@ -303,7 +303,7 @@ public class PreVenta extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jTextField_Bnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(31, 31, 31)
-                                .addComponent(Bnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jButton_BuscarPorNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -323,7 +323,7 @@ public class PreVenta extends javax.swing.JInternalFrame {
                     .addComponent(jLabel6)
                     .addComponent(jButton_BuscarPorCodigo)
                     .addComponent(jLabel7)
-                    .addComponent(Bnombre))
+                    .addComponent(jButton_BuscarPorNombre))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -408,8 +408,7 @@ public class PreVenta extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Debe seleccionar un producto", "ERROR", JOptionPane.WARNING_MESSAGE);
         } else {
             AgregarAlCarro();
-            jTextField_CantProd.setText("");
-            ((DefaultTableModel)jTable_busqueda.getModel()).removeRow(0);
+            jTextField_CantProd.setText("");           
         }
         
     }//GEN-LAST:event_jButton_AgregarAlCarroActionPerformed
@@ -432,17 +431,17 @@ public class PreVenta extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "No hay productos con estos datos", "ERROR", JOptionPane.WARNING_MESSAGE);
         } else {
             Object[] row = { prod.getCodigo(), prod.getNombre(), prod.getDescripcion(), prod.getCategoria(), prod.getComponente(), prod.getStock(), prod.getPrecio() };
-            DefaultTableModel modelbusqueda = new DefaultTableModel();
+            DefaultTableModel modelbusqueda = (DefaultTableModel) jTable_busqueda.getModel();
             if(modelbusqueda.getRowCount() >= 1) {
                 modelbusqueda.removeRow(0);
-            }          
+            }       
             modelbusqueda.addRow(row);
             jTable_busqueda.setModel(modelbusqueda);
         }
-        
+        c.cerrar();
     }//GEN-LAST:event_jButton_BuscarPorCodigoActionPerformed
 
-    private void BnombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BnombreActionPerformed
+    private void jButton_BuscarPorNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_BuscarPorNombreActionPerformed
         Conexion c = new Conexion();
         Producto prod = c.retorna_producto_n(jTextField_Bnombre.getText());
         if(prod == null) {
@@ -458,7 +457,7 @@ public class PreVenta extends javax.swing.JInternalFrame {
         }
         c.cerrar();
         // TODO add your handling code here:
-    }//GEN-LAST:event_BnombreActionPerformed
+    }//GEN-LAST:event_jButton_BuscarPorNombreActionPerformed
 
     private void jTextField_BnombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_BnombreActionPerformed
         // TODO add your handling code here:
@@ -516,11 +515,11 @@ public class PreVenta extends javax.swing.JInternalFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Bnombre;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton_AgregarAlCarro;
     private javax.swing.JButton jButton_BuscarPorCodigo;
+    private javax.swing.JButton jButton_BuscarPorNombre;
     private javax.swing.JButton jButton_Salir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -579,6 +578,7 @@ public class PreVenta extends javax.swing.JInternalFrame {
                     int valor = Integer.parseInt(jTable_busqueda.getValueAt(fila, 6).toString()) * Integer.parseInt(jTextField_CantProd.getText());
                     int subtotal = total + valor;
                     jTextField_preciototal.setText(String.valueOf(subtotal));
+                    ((DefaultTableModel)jTable_busqueda.getModel()).removeRow(0);
                 }
             }
         }
