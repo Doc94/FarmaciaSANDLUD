@@ -30,6 +30,13 @@ public class Producto {
 
     public Producto() {
     }
+
+    public Producto(String codigo, String nombre, int precio, int stock) {
+        this.codigo = codigo;
+        this.nombre = nombre;
+        this.precio = precio;
+        this.stock = stock;
+    }
     
     public String getDescripcion() {
         return descripcion;

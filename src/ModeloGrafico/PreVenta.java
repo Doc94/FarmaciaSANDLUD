@@ -8,9 +8,12 @@ package ModeloGrafico;
 import Clases.Conexion;
 import Clases.Producto;
 import Clases.Usuario;
+import Clases.Venta;
+import com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -53,7 +56,7 @@ public class PreVenta extends javax.swing.JInternalFrame {
         jTable_compra = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        jTextField_Folio4 = new javax.swing.JTextField();
+        jTextField_preciototal = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -171,9 +174,15 @@ public class PreVenta extends javax.swing.JInternalFrame {
 
         jLabel5.setText("TOTAL");
 
-        jTextField_Folio4.setEditable(false);
+        jTextField_preciototal.setEditable(false);
+        jTextField_preciototal.setText("0");
 
         jButton2.setText("Efectuar Compra");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -188,7 +197,7 @@ public class PreVenta extends javax.swing.JInternalFrame {
                         .addGap(40, 40, 40)
                         .addComponent(jLabel5)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField_Folio4, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextField_preciototal, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton2)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -208,7 +217,7 @@ public class PreVenta extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextField_Folio4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextField_preciototal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel5))
                     .addComponent(jButton2))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -400,6 +409,12 @@ public class PreVenta extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton_AgregarAlCarroActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+        int fila = jTable_compra.getSelectedRow();
+        int total = Integer.parseInt(jTextField_preciototal.getText().trim());
+        int valor = Integer.parseInt(jTable_compra.getValueAt(fila, 3).toString());
+        int subtotal = total - valor;
+        jTextField_preciototal.setText(String.valueOf(subtotal));
         ((DefaultTableModel)jTable_compra.getModel()).removeRow(jTable_compra.getSelectedRow());
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -449,6 +464,37 @@ public class PreVenta extends javax.swing.JInternalFrame {
         Main.IniciarVentanaLogin();
     }//GEN-LAST:event_jButton_SalirActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        DefaultTableModel modelcompra = (DefaultTableModel) jTable_compra.getModel();      
+        int col=modelcompra.getRowCount();
+        
+        Conexion c = new Conexion();
+        int f=Integer.parseInt(jTextField_Folio.getText());
+        String fec=jTextField_Fecha.getText();
+        String ve=jTextField_Vendedor.getText();
+        int to= Integer.parseInt(jTextField_preciototal.getText());
+        Venta v = new Venta (f,fec,ve,to);
+        c.crear_venta(v);
+        int cant;
+        int total;
+        String nombre;
+        String codigo;
+        
+        for(int i=0; i<=col;i++)
+            {
+                codigo = String.valueOf(modelcompra.getValueAt(i, 0));
+                nombre = String.valueOf(modelcompra.getValueAt(i, 1));
+                cant = Integer.parseInt(String.valueOf(modelcompra.getValueAt(i, 2)));
+                total = Integer.parseInt(String.valueOf(modelcompra.getValueAt(i, 3)));
+                Producto p = new Producto(codigo, nombre, total, cant);
+                v.detalle.add(p);
+                               
+            }
+        c.crear_detalle(v.detalle,f);
+        
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     public void CargarUsuario(Usuario u) {
         per = u;
     }
@@ -490,8 +536,8 @@ public class PreVenta extends javax.swing.JInternalFrame {
     private javax.swing.JFormattedTextField jTextField_CantProd;
     private javax.swing.JTextField jTextField_Fecha;
     private javax.swing.JTextField jTextField_Folio;
-    private javax.swing.JTextField jTextField_Folio4;
     public static javax.swing.JTextField jTextField_Vendedor;
+    private javax.swing.JTextField jTextField_preciototal;
     // End of variables declaration//GEN-END:variables
 
     private void AgregarAlCarro() {
@@ -521,6 +567,10 @@ public class PreVenta extends javax.swing.JInternalFrame {
                     DefaultTableModel modelcompra = (DefaultTableModel) jTable_compra.getModel();
                     modelcompra.addRow(row);
                     jTable_compra.setModel(modelcompra);
+                    int total = Integer.parseInt(jTextField_preciototal.getText().trim());
+                    int valor = Integer.parseInt(jTable_busqueda.getValueAt(fila, 6).toString()) * Integer.parseInt(jTextField_CantProd.getText());
+                    int subtotal = total + valor;
+                    jTextField_preciototal.setText(String.valueOf(subtotal));
                 }
             }
         }

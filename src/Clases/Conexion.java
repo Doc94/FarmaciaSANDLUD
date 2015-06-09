@@ -5,11 +5,14 @@
  */
 package Clases;
 
+import com.sun.deploy.uitoolkit.impl.fx.ui.MixedCodeInSwing;
+import com.sun.webkit.ContextMenu;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -131,7 +134,56 @@ public class Conexion {
         }
         return pro;
     }
+    public int crear_venta(Venta v)
+    {
+        int rsul=0;
+        Conexion c = new Conexion();
+            
+            String query = "INSERT INTO ventas (fecha,vendedor,total)  values (' ? ',' ? ',' ? ')   ";
+            try { 
+            ps = c.getCon().prepareStatement(query);
+            ps.setString(1, v.getFecha());
+            ps.setString(2, v.getVendedor());
+            ps.setInt(3, v.getTotal());
+            
+            
+            rsul= ps.executeUpdate(); //insert-delete-update | select->executeQuery
+            
+            }
+            catch (SQLException ex)
+            {
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+            }
     
+        return rsul;
+    }
+    
+    public int crear_detalle(ArrayList<Producto> li,int folio)
+    {
+        int rsul=0;
+        Conexion c = new Conexion();
+        for(int i=0;i<li.size();i++)
+        {
+            String query = "INSERT INTO detalle_venta  values ('?','?','?')   ";
+            try { 
+                ps = c.getCon().prepareStatement(query);
+                ps.setInt(1, folio);
+                ps.setString(2, li.get(i).getCodigo());
+                ps.setInt(3, li.get(i).getStock());
+            
+                rsul= ps.executeUpdate(); //insert-delete-update | select->executeQuery
+            }
+            catch (SQLException ex)
+            {
+                Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+            
+             
+            
+        return rsul;
+            
+    }
     public Usuario retorna_usuario(String rut)
     {
         Usuario U = new Usuario();
