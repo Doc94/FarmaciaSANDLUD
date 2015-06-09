@@ -72,7 +72,7 @@ public class Conexion {
     }
     
     public Producto retorna_producto(String codigo) {
-        Producto pro = new Producto();
+        Producto pro = null;
         try {
             Conexion c = new Conexion();
             
@@ -87,6 +87,7 @@ public class Conexion {
             
             while(r_query.next())
             {
+            pro = new Producto();
             pro.setCodigo(String.valueOf(r_query.getObject("codigo")));
             pro.setNombre(String.valueOf(r_query.getObject("nombre")));
             pro.setComponente(String.valueOf(r_query.getObject("compuesto")));
@@ -101,7 +102,7 @@ public class Conexion {
         return pro;
     }
     public Producto retorna_producto_n(String nombre) {
-        Producto pro = new Producto();
+        Producto pro = null;
         try {
             Conexion c = new Conexion();
             
@@ -116,6 +117,7 @@ public class Conexion {
             
             while(r_query.next())
             {
+                pro = new Producto();
             pro.setCodigo(String.valueOf(r_query.getObject("codigo")));
             pro.setNombre(String.valueOf(r_query.getObject("nombre")));
             pro.setComponente(String.valueOf(r_query.getObject("compuesto")));
@@ -156,4 +158,28 @@ public class Conexion {
         }
         return U;
      }
+    
+    public int getUltimoFolio() {
+        int fol = -1;       
+        try {
+            Conexion c = new Conexion();
+            
+            String query = "SELECT * FROM ventas ORDER BY folio DESC";
+            
+            ps = c.getCon().prepareStatement(query);
+          
+            
+            
+            ResultSet r_query = ps.executeQuery(); //insert-delete-update | select->executeQuery
+            
+            if(r_query.next()) {
+                fol = Integer.parseInt(String.valueOf(r_query.getObject("folio")));
+            } else {
+                fol = 0;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return fol;
+    }
 }

@@ -45,7 +45,7 @@ public class PreVenta extends javax.swing.JInternalFrame {
         jTextField_Fecha = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel_fecha = new javax.swing.JLabel();
-        jTextField_Folio2 = new javax.swing.JTextField();
+        jTextField_Folio = new javax.swing.JTextField();
         jTextField_Vendedor = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -66,7 +66,6 @@ public class PreVenta extends javax.swing.JInternalFrame {
         Bnombre = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         jButton_AgregarAlCarro = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
         jTextField_CantProd = new javax.swing.JFormattedTextField();
         jButton_Salir = new javax.swing.JButton();
 
@@ -100,7 +99,7 @@ public class PreVenta extends javax.swing.JInternalFrame {
 
         jLabel_fecha.setText("FECHA");
 
-        jTextField_Folio2.setEditable(false);
+        jTextField_Folio.setEditable(false);
 
         jTextField_Vendedor.setEditable(false);
 
@@ -116,7 +115,7 @@ public class PreVenta extends javax.swing.JInternalFrame {
                     .addComponent(jLabel1)
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField_Folio2, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextField_Folio, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35)
                 .addComponent(jLabel_fecha)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -135,7 +134,7 @@ public class PreVenta extends javax.swing.JInternalFrame {
                     .addComponent(jLabel1)
                     .addComponent(jTextField_Fecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel_fecha)
-                    .addComponent(jTextField_Folio2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField_Folio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField_Vendedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addGap(18, 18, 18)
@@ -219,7 +218,7 @@ public class PreVenta extends javax.swing.JInternalFrame {
 
         jTable_busqueda.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"Pedro", "arenas", "holi", null, null, null, null}
+
             },
             new String [] {
                 "Codigo", "Nombre", "Descripción", "Categoría", "Composición", "Stock", "Precio"
@@ -273,13 +272,6 @@ public class PreVenta extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton6.setText("TEST");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
-            }
-        });
-
         jTextField_CantProd.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -309,9 +301,7 @@ public class PreVenta extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jTextField_CantProd, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton_AgregarAlCarro)
-                                .addGap(102, 102, 102)
-                                .addComponent(jButton6)))
+                                .addComponent(jButton_AgregarAlCarro)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -332,7 +322,6 @@ public class PreVenta extends javax.swing.JInternalFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(jButton_AgregarAlCarro)
-                    .addComponent(jButton6)
                     .addComponent(jTextField_CantProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(27, Short.MAX_VALUE))
         );
@@ -407,35 +396,8 @@ public class PreVenta extends javax.swing.JInternalFrame {
 
     private void jButton_AgregarAlCarroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_AgregarAlCarroActionPerformed
         // TODO add your handling code here:
-        if(jTextField_CantProd.getText().trim().equals("")) {
-            JOptionPane.showMessageDialog(this, "Coloque la cant de productos", "ERROR", JOptionPane.WARNING_MESSAGE);
-        } else {
-            int fila = jTable_busqueda.getSelectedRow();
-            Object data = jTable_busqueda.getValueAt(fila, 5);
-            if(Integer.parseInt(data.toString()) < Integer.parseInt(jTextField_CantProd.getText())) {
-                JOptionPane.showMessageDialog(this, "No puedes añadir mas de lo que hay", "ERROR", JOptionPane.WARNING_MESSAGE);
-            } else {
-                Object[] row = { jTable_busqueda.getValueAt(fila, 0), jTable_busqueda.getValueAt(fila, 1), jTextField_CantProd.getText(), Integer.parseInt(jTable_busqueda.getValueAt(fila, 6).toString()) * Integer.parseInt(jTextField_CantProd.getText())};
-                DefaultTableModel modelcompra = (DefaultTableModel) jTable_compra.getModel();
-                modelcompra.addRow(row);
-                jTable_compra.setModel(modelcompra);
-            }
-        }
+        AgregarAlCarro();
     }//GEN-LAST:event_jButton_AgregarAlCarroActionPerformed
-
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
-        int co = jTable_busqueda.getSelectedColumn();
-        int fi = jTable_busqueda.getSelectedRow();
-        Object data = jTable_busqueda.getValueAt(fi, 0);
-        JOptionPane.showMessageDialog(this, "VALOR " + data.toString(), "OK", JOptionPane.INFORMATION_MESSAGE);
-        
-        String nvalue1 = data.toString();
-        Object[] row = { nvalue1 };
-        DefaultTableModel modelcompra = (DefaultTableModel) jTable_compra.getModel();
-        modelcompra.addRow(row);
-        jTable_compra.setModel(modelcompra);
-    }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         ((DefaultTableModel)jTable_compra.getModel()).removeRow(jTable_compra.getSelectedRow());
@@ -449,9 +411,12 @@ public class PreVenta extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "No hay productos con estos datos", "ERROR", JOptionPane.WARNING_MESSAGE);
         } else {
             Object[] row = { prod.getCodigo(), prod.getNombre(), prod.getDescripcion(), prod.getCategoria(), prod.getComponente(), prod.getStock(), prod.getPrecio() };
-            DefaultTableModel modelcompra = (DefaultTableModel) jTable_busqueda.getModel();
-            modelcompra.addRow(row);
-            jTable_busqueda.setModel(modelcompra);
+            DefaultTableModel modelbusqueda = new DefaultTableModel();
+            if(modelbusqueda.getRowCount() >= 1) {
+                modelbusqueda.removeRow(0);
+            }          
+            modelbusqueda.addRow(row);
+            jTable_busqueda.setModel(modelbusqueda);
         }
         
     }//GEN-LAST:event_jButton_BuscarPorCodigoActionPerformed
@@ -463,10 +428,15 @@ public class PreVenta extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "No hay productos con estos datos", "ERROR", JOptionPane.WARNING_MESSAGE);
         } else {
             Object[] row = { prod.getCodigo(), prod.getNombre(), prod.getDescripcion(), prod.getCategoria(), prod.getComponente(), prod.getStock(), prod.getPrecio() };
-            DefaultTableModel modelcompra = (DefaultTableModel) jTable_busqueda.getModel();
-            modelcompra.addRow(row);
-            jTable_busqueda.setModel(modelcompra);
-        }        // TODO add your handling code here:
+            DefaultTableModel modelbusqueda = (DefaultTableModel) jTable_busqueda.getModel();
+            if(modelbusqueda.getRowCount() >= 1) {
+                modelbusqueda.removeRow(0);
+            } 
+            modelbusqueda.addRow(row);
+            jTable_busqueda.setModel(modelbusqueda);
+        }
+        c.cerrar();
+        // TODO add your handling code here:
     }//GEN-LAST:event_BnombreActionPerformed
 
     private void jTextField_BnombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_BnombreActionPerformed
@@ -484,16 +454,17 @@ public class PreVenta extends javax.swing.JInternalFrame {
     }
 
     private void CargarNuevaCompra() {
+        Conexion c = new Conexion();
         LocalDateTime fecha = LocalDateTime.now();
         String fechacompleta = Integer.toString(fecha.getDayOfMonth()) + "/" + Integer.toString(fecha.getMonthValue()) + "/" + Integer.toString(fecha.getYear());
         jTextField_Fecha.setText(fechacompleta);
+        jTextField_Folio.setText(String.valueOf(c.getUltimoFolio()));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Bnombre;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton_AgregarAlCarro;
     private javax.swing.JButton jButton_BuscarPorCodigo;
     private javax.swing.JButton jButton_Salir;
@@ -518,9 +489,41 @@ public class PreVenta extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTextField_Bnombre;
     private javax.swing.JFormattedTextField jTextField_CantProd;
     private javax.swing.JTextField jTextField_Fecha;
-    private javax.swing.JTextField jTextField_Folio2;
+    private javax.swing.JTextField jTextField_Folio;
     private javax.swing.JTextField jTextField_Folio4;
     public static javax.swing.JTextField jTextField_Vendedor;
     // End of variables declaration//GEN-END:variables
+
+    private void AgregarAlCarro() {
+        if(jTextField_CantProd.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(this, "Coloque la cant de productos", "ERROR", JOptionPane.WARNING_MESSAGE);
+        } else {
+            int fila = jTable_busqueda.getSelectedRow();
+            Object data = jTable_busqueda.getValueAt(fila, 5);
+            if(Integer.parseInt(data.toString()) < Integer.parseInt(jTextField_CantProd.getText())) {
+                JOptionPane.showMessageDialog(this, "No puedes añadir mas de lo que hay", "ERROR", JOptionPane.WARNING_MESSAGE);
+            } else {
+                int filasc = jTable_compra.getModel().getRowCount();
+                boolean existeproducto = false;
+                if(filasc >= 1) {
+                    for(int i = 0; i < filasc; i++) {
+                        Object code = jTable_compra.getValueAt(i, 0);
+                        if(code.toString().equalsIgnoreCase(jTable_busqueda.getValueAt(fila, 0).toString())) {
+                            existeproducto = true;
+                        }
+                    }
+                }
+                
+                if(existeproducto) {
+                    JOptionPane.showMessageDialog(this, "Ya existe el producto en el carro de compra", "ERROR", JOptionPane.WARNING_MESSAGE);
+                } else {
+                    Object[] row = { jTable_busqueda.getValueAt(fila, 0), jTable_busqueda.getValueAt(fila, 1), jTextField_CantProd.getText(), Integer.parseInt(jTable_busqueda.getValueAt(fila, 6).toString()) * Integer.parseInt(jTextField_CantProd.getText())};
+                    DefaultTableModel modelcompra = (DefaultTableModel) jTable_compra.getModel();
+                    modelcompra.addRow(row);
+                    jTable_compra.setModel(modelcompra);
+                }
+            }
+        }
+    }
   
 }
