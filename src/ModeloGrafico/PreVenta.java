@@ -469,7 +469,7 @@ public class PreVenta extends javax.swing.JInternalFrame {
         int col=modelcompra.getRowCount();
         
         Conexion c = new Conexion();
-        int f=Integer.parseInt(jTextField_Folio.getText());
+        int f=Integer.parseInt(jTextField_Folio.getText())+1;
         String fec=jTextField_Fecha.getText();
         String ve=jTextField_Vendedor.getText();
         int to= Integer.parseInt(jTextField_preciototal.getText());
@@ -480,7 +480,7 @@ public class PreVenta extends javax.swing.JInternalFrame {
         String nombre;
         String codigo;
         
-        for(int i=0; i<=col;i++)
+        for(int i=0; i<col;i++)
             {
                 codigo = String.valueOf(modelcompra.getValueAt(i, 0));
                 nombre = String.valueOf(modelcompra.getValueAt(i, 1));
@@ -491,8 +491,8 @@ public class PreVenta extends javax.swing.JInternalFrame {
                                
             }
         c.crear_detalle(v.detalle,f);
-        
-        
+        JOptionPane.showMessageDialog(this, "Su compra ha sido realizada con exito");
+        jTextField_Folio.setText(String.valueOf(f));
     }//GEN-LAST:event_jButton2ActionPerformed
 
     public void CargarUsuario(Usuario u) {

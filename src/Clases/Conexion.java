@@ -139,12 +139,13 @@ public class Conexion {
         int rsul=0;
         Conexion c = new Conexion();
             
-            String query = "INSERT INTO ventas (fecha,vendedor,total)  values (' ? ',' ? ',' ? ')   ";
+            String query = "insert into ventas values(?,?,?,?)";
             try { 
             ps = c.getCon().prepareStatement(query);
-            ps.setString(1, v.getFecha());
-            ps.setString(2, v.getVendedor());
-            ps.setInt(3, v.getTotal());
+            ps.setInt(1, v.getFolio());
+            ps.setString(2, v.getFecha());
+            ps.setString(3, v.getVendedor());
+            ps.setInt(4, v.getTotal());
             
             
             rsul= ps.executeUpdate(); //insert-delete-update | select->executeQuery
@@ -163,8 +164,9 @@ public class Conexion {
         int rsul=0;
         Conexion c = new Conexion();
         for(int i=0;i<li.size();i++)
-        {
-            String query = "INSERT INTO detalle_venta  values ('?','?','?')   ";
+        {   
+            
+            String query = "insert into detalle_venta  values (?,?,?)   ";
             try { 
                 ps = c.getCon().prepareStatement(query);
                 ps.setInt(1, folio);
