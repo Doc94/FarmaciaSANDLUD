@@ -438,6 +438,7 @@ public class PreVenta extends javax.swing.JInternalFrame {
             modelbusqueda.addRow(row);
             jTable_busqueda.setModel(modelbusqueda);
         }
+        jTextField_BCodigo.setText("");
         c.cerrar();
     }//GEN-LAST:event_jButton_BuscarPorCodigoActionPerformed
 
@@ -455,6 +456,7 @@ public class PreVenta extends javax.swing.JInternalFrame {
             modelbusqueda.addRow(row);
             jTable_busqueda.setModel(modelbusqueda);
         }
+        jTextField_Bnombre.setText("");
         c.cerrar();
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton_BuscarPorNombreActionPerformed
@@ -590,12 +592,12 @@ public class PreVenta extends javax.swing.JInternalFrame {
         
         if(datos_busqueda > 0) {
             for(int x = 0; x < datos_busqueda; x++) {
-                ((DefaultTableModel)jTable_busqueda.getModel()).removeRow(x);
+                ((DefaultTableModel)jTable_busqueda.getModel()).removeRow(0);
             }
         }
         if(datos_comprar > 0) {
             for(int x = 0; x < datos_comprar; x++) {
-                ((DefaultTableModel)jTable_compra.getModel()).removeRow(x);
+                ((DefaultTableModel)jTable_compra.getModel()).removeRow(0);
             }
         }
     }
