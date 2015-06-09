@@ -23,6 +23,7 @@ public class Main extends javax.swing.JFrame {
     public static PreVenta ventana_preventa = new PreVenta();
     public static Admin ventana_admin = new Admin();
     public static AdministrarProductos ventana_adminprod = new AdministrarProductos();
+    public static IngresoProductos nuevo_producto = new IngresoProductos();
     
     public Main() {
         
@@ -117,6 +118,12 @@ public class Main extends javax.swing.JFrame {
         jDesktopPaneM.add(ventana_adminprod);
         ventana_adminprod.setClosable(false);
         ventana_adminprod.show();
+    }
+    
+    static void IniciarIngresoProducto() {
+        jDesktopPaneM.add(nuevo_producto);
+        nuevo_producto.setClosable(false);
+        nuevo_producto.show();
     }
     /**
      * @param args the command line arguments

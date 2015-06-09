@@ -295,4 +295,82 @@ public class Conexion {
         }
         return fol;
     }
+    
+    public int ModificaProducto(Producto p)
+    {
+        int rsul=0;
+        Conexion c = new Conexion();
+            
+            String query = "UPDATE producto SET nombre=?, compuesto=?, descripción=?, categoria=?, stock=?, precio=? WHERE codigo=? ";
+            try { 
+            ps = c.getCon().prepareStatement(query);
+            ps.setString(1, p.getNombre());
+            ps.setString(2, p.getComponente());
+            ps.setString(3, p.getDescripcion());
+            ps.setString(4, p.getCategoria());
+            ps.setInt(5, p.getStock());
+            ps.setInt(6, p.getPrecio());
+            ps.setString(7, p.getCodigo());
+            
+            
+            rsul= ps.executeUpdate(); //insert-delete-update | select->executeQuery
+            
+            }
+            catch (SQLException ex)
+            {
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        return rsul;
+    }
+    
+    public int EliminaProducto(Producto p)
+    {
+        int rsul=0;
+        Conexion c = new Conexion();
+            
+            String query = "DELETE FROM producto WHERE codigo=? ";
+            try { 
+            ps = c.getCon().prepareStatement(query);
+            ps.setString(1, p.getCodigo());
+            
+            
+            rsul= ps.executeUpdate(); //insert-delete-update | select->executeQuery
+            
+            }
+            catch (SQLException ex)
+            {
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        return rsul;
+    }
+    
+    public int CreaProducto(Producto p)
+    {
+        int rsul=0;
+        Conexion c = new Conexion();
+            
+            String query = "INSERT INTO producto VALUES ( ?, ?, ?, ?, ?, ?, ? )";
+            try { 
+            ps = c.getCon().prepareStatement(query);
+            ps.setString(1, p.getCodigo());
+            ps.setString(2, p.getNombre());
+            ps.setString(3, p.getComponente());
+            ps.setString(4, p.getDescripcion());
+            ps.setString(5, p.getCategoria());
+            ps.setInt(6, p.getStock());
+            ps.setInt(7, p.getPrecio());
+            
+            rsul= ps.executeUpdate(); //insert-delete-update | select->executeQuery
+            
+            }
+            catch (SQLException ex)
+            {
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        return rsul;
+    }
+    
 }

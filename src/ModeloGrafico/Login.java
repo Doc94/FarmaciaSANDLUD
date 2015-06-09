@@ -137,6 +137,7 @@ public class Login extends javax.swing.JInternalFrame {
                     int blah = user.getNivel();
                     if(user.getNivel() == 1) {
                         Main.IniciarVentanaAdmin(user);
+                        Main.IniciarVentanaPreVenta(user);
                     } else {
                         Main.IniciarVentanaPreVenta(user);
                     }
