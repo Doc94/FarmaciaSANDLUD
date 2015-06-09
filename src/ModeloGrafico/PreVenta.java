@@ -9,7 +9,6 @@ import Clases.Conexion;
 import Clases.Producto;
 import Clases.Usuario;
 import Clases.Venta;
-import com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.time.LocalDateTime;
@@ -405,7 +404,14 @@ public class PreVenta extends javax.swing.JInternalFrame {
 
     private void jButton_AgregarAlCarroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_AgregarAlCarroActionPerformed
         // TODO add your handling code here:
-        AgregarAlCarro();
+        if(jTable_busqueda.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(this, "Debe seleccionar un producto", "ERROR", JOptionPane.WARNING_MESSAGE);
+        } else {
+            AgregarAlCarro();
+            jTextField_CantProd.setText("");
+            ((DefaultTableModel)jTable_busqueda.getModel()).removeRow(0);
+        }
+        
     }//GEN-LAST:event_jButton_AgregarAlCarroActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -493,6 +499,8 @@ public class PreVenta extends javax.swing.JInternalFrame {
         c.crear_detalle(v.detalle,f);
         JOptionPane.showMessageDialog(this, "Su compra ha sido realizada con exito");
         jTextField_Folio.setText(String.valueOf(f));
+        jTextField_preciototal.setText("0");
+        LimpiarTablas();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     public void CargarUsuario(Usuario u) {
@@ -572,6 +580,22 @@ public class PreVenta extends javax.swing.JInternalFrame {
                     int subtotal = total + valor;
                     jTextField_preciototal.setText(String.valueOf(subtotal));
                 }
+            }
+        }
+    }
+
+    private void LimpiarTablas() {
+        int datos_busqueda = jTable_busqueda.getRowCount();
+        int datos_comprar = jTable_compra.getRowCount();
+        
+        if(datos_busqueda > 0) {
+            for(int x = 0; x < datos_busqueda; x++) {
+                ((DefaultTableModel)jTable_busqueda.getModel()).removeRow(x);
+            }
+        }
+        if(datos_comprar > 0) {
+            for(int x = 0; x < datos_comprar; x++) {
+                ((DefaultTableModel)jTable_compra.getModel()).removeRow(x);
             }
         }
     }
