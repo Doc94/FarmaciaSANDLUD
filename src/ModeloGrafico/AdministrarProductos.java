@@ -62,6 +62,7 @@ public class AdministrarProductos extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         btnSeleccionar = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        btnSalir = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -146,6 +147,13 @@ public class AdministrarProductos extends javax.swing.JInternalFrame {
             }
         });
 
+        btnSalir.setText("Salir");
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -182,6 +190,8 @@ public class AdministrarProductos extends javax.swing.JInternalFrame {
                                                 .addComponent(txtStock, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnEliminar)
+                                .addGap(150, 150, 150)
+                                .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
@@ -228,9 +238,9 @@ public class AdministrarProductos extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnSeleccionar)
                         .addGap(24, 24, 24)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblCodigo)
-                            .addComponent(jLabel2))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblCodigo))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
@@ -251,7 +261,8 @@ public class AdministrarProductos extends javax.swing.JInternalFrame {
                             .addComponent(txtCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSalir))
                 .addGap(14, 14, 14))
         );
 
@@ -294,19 +305,15 @@ public class AdministrarProductos extends javax.swing.JInternalFrame {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
+        try{
         String codigo = lblCodigo.getText();
         String nombre = txtNombre.getText();
         String componente = txtComponente.getText();
         String categoria = txtCategoria.getText();
         String descripcion = txtDescripcion.getText();
-        int precio =0;
-        int stock =0;
-        try{
-        precio = Integer.parseInt(txtPrecio.getText());
-        stock = Integer.parseInt(txtStock.getText());
-        }catch(NumberFormatException ex){
-            JOptionPane.showMessageDialog(this, "Debe ingresar valor numerico en precio y stock", "error", JOptionPane.ERROR_MESSAGE);
-        }
+        int precio = Integer.parseInt(txtPrecio.getText());
+        int stock = Integer.parseInt(txtStock.getText());
+        
         
         Producto p = new Producto(codigo, nombre, componente, categoria, descripcion, precio, stock);
         
@@ -316,6 +323,10 @@ public class AdministrarProductos extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Producto Modificado!", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
         }else{
             JOptionPane.showMessageDialog(this, "Hubo un error en la modificacion", "error", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        }catch(NumberFormatException ex){
+            JOptionPane.showMessageDialog(this, "Debe ingresar valor numerico en precio y stock", "error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
@@ -355,11 +366,17 @@ public class AdministrarProductos extends javax.swing.JInternalFrame {
         Main.IniciarIngresoProducto();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_btnSalirActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnGuardar;
+    private javax.swing.JButton btnSalir;
     private javax.swing.JButton btnSeleccionar;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;

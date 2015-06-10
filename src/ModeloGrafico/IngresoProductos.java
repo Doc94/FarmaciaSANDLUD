@@ -162,19 +162,15 @@ public class IngresoProductos extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        try{
         String codigo = txtCodigo.getText();
         String nombre = txtNombre.getText();
         String componente = txtCompuesto.getText();
         String categoria = txtCategoria.getText();
         String descripcion = txtDescripcion.getText();
-        int precio =0;
-        int stock =0;
-        try{
-        precio = Integer.parseInt(txtPrecio.getText());
-        stock = Integer.parseInt(txtStock.getText());
-        }catch(NumberFormatException ex){
-            JOptionPane.showMessageDialog(this, "Debe ingresar valor numerico en precio y stock", "error", JOptionPane.ERROR_MESSAGE);
-        }
+        int precio = Integer.parseInt(txtPrecio.getText());
+        int stock = Integer.parseInt(txtStock.getText());
+        
         
         Producto p = new Producto(codigo, nombre, componente, categoria, descripcion, precio, stock);
         
@@ -184,6 +180,10 @@ public class IngresoProductos extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Producto Modificado!", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
         }else{
             JOptionPane.showMessageDialog(this, "Hubo un error en la modificacion", "error", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        }catch(NumberFormatException ex){
+            JOptionPane.showMessageDialog(this, "Debe ingresar valor numerico en precio y stock", "error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
